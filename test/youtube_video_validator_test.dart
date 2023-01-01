@@ -28,19 +28,15 @@ void main() {
   });
 
   test('Validate validAddresses are Youtube Video URLs', () {
-    validYoutubeVideoURLs.forEach(
-      (String actual) => expect(
-          YoutubeVideoValidator.validateUrl(actual), isTrue,
-          reason: 'URL: $actual'),
-    );
+    for (var actual in validYoutubeVideoURLs) {
+      expect(YoutubeVideoValidator.validateUrl(actual), isTrue, reason: 'URL: $actual');
+    }
   });
 
   test('Validate invalidAddresses are invalid emails', () {
-    inValidYoutubeVideoURLs.forEach(
-      (String actual) => expect(
-          YoutubeVideoValidator.validateUrl(actual), isFalse,
-          reason: 'URL: $actual'),
-    );
+    for (var actual in inValidYoutubeVideoURLs) {
+      expect(YoutubeVideoValidator.validateUrl(actual), isFalse, reason: 'URL: $actual');
+    }
   });
 
   final List<String> validYoutubeVideoIDs = [
@@ -67,28 +63,22 @@ void main() {
   test('Validate validYoutubeVideoIDs are Youtube Video IDs', () async {
     await Future.forEach(
       validYoutubeVideoIDs,
-      (String actual) async => expectLater(
-          await YoutubeVideoValidator.validateID(actual), isTrue,
-          reason: 'Video ID: $actual'),
+      (String actual) async => expectLater(await YoutubeVideoValidator.validateID(actual), isTrue, reason: 'Video ID: $actual'),
     );
   });
 
   test('Validate inValidYoutubeVideoIDs are Youtube Video IDs', () async {
     await Future.forEach(
       inValidYoutubeVideoIDs,
-      (String actual) async => expectLater(
-          await YoutubeVideoValidator.validateID(actual), isFalse,
-          reason: 'Video ID: $actual'),
+      (String actual) async => expectLater(await YoutubeVideoValidator.validateID(actual), isFalse, reason: 'Video ID: $actual'),
     );
   });
 
-  test('Validate validYoutubeVideoIDs are Youtube Video IDs (using loadData)',
-      () async {
+  test('Validate validYoutubeVideoIDs are Youtube Video IDs (using loadData)', () async {
     final String actual = validYoutubeVideoIDs[0];
 
     await YoutubeVideoValidator.validateID(actual, loadData: true);
 
-    await expectLater(YoutubeVideoValidator.video.id, equals(actual),
-        reason: 'Video Data: ${YoutubeVideoValidator.video.toString()}');
+    await expectLater(YoutubeVideoValidator.video.id, equals(actual), reason: 'Video Data: ${YoutubeVideoValidator.video.toString()}');
   });
 }

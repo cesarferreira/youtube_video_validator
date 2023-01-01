@@ -1,16 +1,16 @@
 class YoutubeVideo {
   YoutubeVideo();
 
-  String id;
-  String title;
-  int length;
-  int views;
-  String channelID;
-  String author;
-  String description;
-  String tags;
-  String thubmnail;
-  double rating;
+  String? id;
+  String? title;
+  int? length;
+  int? views;
+  String? channelID;
+  String? author;
+  String? description;
+  String? tags;
+  String? thubmnail;
+  double? rating;
 
   @override
   String toString() {
@@ -21,7 +21,7 @@ class YoutubeVideo {
     return 'https://youtu.be/$id';
   }
 
-  String channelUrl() {
+  String? channelUrl() {
     return (channelID == null) ? null : 'https://youtube.com/user/$channelID';
   }
 
